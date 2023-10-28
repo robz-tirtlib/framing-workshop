@@ -1,7 +1,8 @@
-from django.http import Http404
-from django.shortcuts import render
+from django.http import Http404, HttpResponse, HttpResponseNotAllowed
+from django.shortcuts import render, redirect
+from django.urls import reverse
 
-from .models import Frame
+from .models import Frame, Review
 
 
 def index(request):
@@ -19,8 +20,22 @@ def frame(request, frame_id: int):
     except Frame.DoesNotExist:
         raise Http404(f"Frame with id={frame_id} not found.")
 
-    context = {
-        "frame": frame,
-    }
+    if request.method == "GET":
+        reviews = Review.objects.filter(frame=frame_id).order_by("-created_at")
+        context = {
+            "frame": frame,
+            "reviews": reviews,
+        }
 
-    return render(request, "workshopapp/frame.html", context)
+        return render(request, "workshopapp/frame.html", context)
+    elif request.method == "POST":
+        review_content = request.POST["review_content"]
+
+        if review_content:
+            review_obj = Review(content=review_content, frame=frame)
+            review_obj.save()
+
+        kw = {"frame_id": frame_id}
+        return redirect(reverse("workshopapp:frame", kwargs=kw))
+
+    return HttpResponseNotAllowed(["GET", "POST"])

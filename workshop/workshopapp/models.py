@@ -12,3 +12,9 @@ class Frame(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+
+class Review(models.Model):
+    content = models.CharField(max_length=1000, null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    frame = models.ForeignKey(Frame, on_delete=models.CASCADE)
