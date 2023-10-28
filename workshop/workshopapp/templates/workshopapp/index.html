@@ -1,0 +1,9 @@
+{% if frames %}
+    <ul>
+    {% for frame in frames %}
+        <li><a href="{% url 'frame' frame.id %}">{{ frame.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No frames are available.</p>
+{% endif %}
