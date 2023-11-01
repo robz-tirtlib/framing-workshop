@@ -1,21 +1,23 @@
-<a href="{% url 'workshopapp:index' %}">Главная</a>
+{% extends 'workshopapp/base.html' %}
 
-<p>{{ frame.name }} costs {{ frame.cost }}</p>
-<p>{{ frame.amount }} items left.</p>
+{% block content %}
+    <p>{{ frame.name }} costs {{ frame.cost }}</p>
+    <p>{{ frame.amount }} items left.</p>
 
-<p>Напишите отзыв:</p>
-<form action="{% url 'workshopapp:frame' frame.id %}" method="post">
-    {% csrf_token %}
-    <input id="review_content" type="text" name="review_content">
-    <input type="submit" value="Отправить">
-</form>
+    <p>Напишите отзыв:</p>
+    <form action="{% url 'workshopapp:frame' frame.id %}" method="post">
+        {% csrf_token %}
+        <input id="review_content" type="text" name="review_content">
+        <input type="submit" value="Отправить">
+    </form>
 
-<p>Отзывы:</p>
+    <p>Отзывы:</p>
 
-{% for review in reviews %}
-    <hr>
-    <p>{{ review.created_at }}</p>
-    <p>{{ review.content }}</p>
-{% empty %}
-    <p>Пока отзывов нет.</p>
-{% endfor %}
+    {% for review in reviews %}
+        <hr>
+        <p>{{ review.created_at }}</p>
+        <p>{{ review.content }}</p>
+    {% empty %}
+        <p>Пока отзывов нет.</p>
+    {% endfor %}
+{% endblock %}
