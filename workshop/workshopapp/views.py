@@ -1,4 +1,4 @@
-from django.http import Http404, HttpResponse, HttpResponseNotAllowed
+from django.http import Http404, HttpResponseNotAllowed
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
