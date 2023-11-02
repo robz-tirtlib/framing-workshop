@@ -39,3 +39,13 @@ def frame(request, frame_id: int):
         return redirect(reverse("workshopapp:frame", kwargs=kw))
 
     return HttpResponseNotAllowed(["GET", "POST"])
+
+
+def contacts(request):
+    context = {}
+    return render(request, "workshopapp/contacts.html", context)
+
+
+def about(request):
+    context = {}
+    return render(request, "workshopapp/about.html", context)
