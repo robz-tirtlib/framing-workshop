@@ -22,9 +22,16 @@
             {% csrf_token %}
             <input type="text" id="username" class="fadeIn second" name="username" placeholder="Логин">
             <input type="text" id="email" class="fadeIn third" name="email" placeholder="E-mail">
-            <input type="text" id="password" class="fadeIn third" name="password" placeholder="Пароль" style="-webkit-text-security: disc">
-            <input type="text" id="password2" class="fadeIn third" name="password2" placeholder="Повтор пароля" style="-webkit-text-security: disc">
+            <input type="text" id="password" class="fadeIn third" name="password" placeholder="Пароль пароль" style="-webkit-text-security: disc">
+            <input type="text" id="password2" class="fadeIn third" name="password2" placeholder="Пароль пароль" style="-webkit-text-security: disc">
             <input id="button" type="submit" class="fadeIn fourth" value="Зарегистрироваться">
+            {% for field, errors in form.errors.items %}
+              {% for error in errors %}
+                <p class="small-12 columns val-error-msg error margin-below alert alert-danger">{{ field }}: {{ error }}</p>
+              {% empty %}
+              {% endfor %}
+            {% empty %}
+            {% endfor %}
           </form>
       
           <div id="formFooter">
