@@ -2,7 +2,8 @@ from django.http import Http404, HttpResponseNotAllowed
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from .models import Frame, Review
+from .models import Frame, Review, Feedback
+from .forms import FeedbackForm
 
 
 def index(request):
@@ -42,7 +43,20 @@ def frame(request, frame_id: int):
 
 
 def contacts(request):
-    context = {}
+    if request.method == "POST":
+        form = FeedbackForm(request.POST)
+
+        if form.is_valid():
+            feedback = Feedback(
+                name=form.cleaned_data["name"],
+                email=form.cleaned_data["email"],
+                text=form.cleaned_data["text"],
+                )
+            feedback.save()
+            return render(request, "workshopapp/contacts.html")
+
+        return render(request, "workshopapp/contacts.html", {"form": form})
+    context = {"form": FeedbackForm()}
     return render(request, "workshopapp/contacts.html", context)
 
 

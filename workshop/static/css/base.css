@@ -1,5 +1,14 @@
-.contacts {
+.contacts h1, h2 {
     text-align: center;
+}
+
+.contacts-text {
+    text-align: center;
+}
+
+.contacts h2 {
+    margin-top: 1%;
+    margin-bottom: 2%;
 }
 
 .map {
@@ -7,6 +16,25 @@
     margin-right: auto;
     margin-top: 1%;
     margin-bottom: 1%;
+}
+
+.ya-map {
+    box-shadow:
+    2.8px 1.3px 2.2px rgba(0, 0, 0, 0.006),
+    6.7px 3.1px 5.3px rgba(0, 0, 0, 0.008),
+    12.5px 5.8px 10px rgba(0, 0, 0, 0.01),
+    22.3px 10.3px 17.9px rgba(0, 0, 0, 0.012),
+    41.8px 19.2px 33.4px rgba(0, 0, 0, 0.014),
+    100px 46px 80px rgba(0, 0, 0, 0.02);
+
+    -moz-border-radius: 14px 14px 14px 14px; /* Firefox */
+    -webkit-border-radius: 14px 14px 14px 14px; /* Safari, Chrome */
+    -khtml-border-radius: 14px 14px 14px 14px; /* KHTML */
+    border-radius: 14px 14px 14px 14px; /* CSS3 */
+    
+    overflow: hidden;
+    
+    position: relative;
 }
 
 .about h1 {
