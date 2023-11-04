@@ -7,6 +7,10 @@ from django.contrib.auth import authenticate, login
 from .forms import RegisterForm
 
 
+def forgot_password(request):
+    return render(request, "users/forgot_password.html", {})
+
+
 def login_user(request):
     if request.method == "POST":
         username = request.POST.get("username")
