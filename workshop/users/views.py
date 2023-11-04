@@ -8,7 +8,6 @@ from .forms import RegisterForm
 
 
 def login_user(request):
-    print(request.__dict__)
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")

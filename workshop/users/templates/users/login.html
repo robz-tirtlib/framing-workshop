@@ -14,13 +14,14 @@
     <div class="wrapper fadeInDown">
         <div id="formContent">
           <div class="fadeIn first">
-            <img src="https://i.pinimg.com/736x/ff/a0/9a/ffa09aec412db3f54deadf1b3781de2a.jpg" id="icon"/>
+            <!-- <img src="https://i.pinimg.com/736x/ff/a0/9a/ffa09aec412db3f54deadf1b3781de2a.jpg" id="icon"/> -->
+            <img src="{% static 'images/user_image.png' %}" id="icon"/>
           </div>
       
           <form method="POST">
             {% csrf_token %}
             <input type="text" id="username" class="fadeIn second" name="username" placeholder="Логин">
-            <input type="text" id="password" class="fadeIn third" name="password" placeholder="Пароль">
+            <input type="text" id="password" class="fadeIn third" name="password" placeholder="Пароль пароль" style="-webkit-text-security: disc">
             <input type="submit" class="fadeIn fourth" value="Войти">
             {% if error %}
                 <p class="small-12 columns val-error-msg error margin-below alert alert-danger">{{ error }}</p>
