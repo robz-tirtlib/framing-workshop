@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if frames %}
+        <ul>
+        {% for frame in frames %}
+            <li><a href="{% url 'workshopapp:frame' frame.id %}">{{ frame.name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No frames are available.</p>
+    {% endif %}
+{% endblock %}

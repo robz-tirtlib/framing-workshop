@@ -1,13 +1,26 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block includes %}
+    <link rel="stylesheet" href="{% static 'css/slider.css' %}">
+{% endblock %}
+
 {% block content %}
-    {% if frames %}
-        <ul>
-        {% for frame in frames %}
-            <li><a href="{% url 'workshopapp:frame' frame.id %}">{{ frame.name }}</a></li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No frames are available.</p>
-    {% endif %}
+    <div class="container" style="height: 100%;">
+        <div class="slider" style="height: 100%;">
+            <ul id="slides">
+                <li class="slide showing"><img src="{% static 'images/slider_image_1.jpg' %}" style="height: 100%; width: 100%; object-fit: cover;"></li>
+                <li class="slide"><img src="{% static 'images/slider_image_2.jpg' %}" style="height: 100%; width: 100%; object-fit: cover;"></li>
+                <li class="slide"><img src="{% static 'images/slider_image_3.jpg' %}" style="height: 100%; width: 100%; object-fit: cover;"></li>
+                <li class="slide"><img src="{% static 'images/slider_image_4.jpg' %}" style="height: 100%; width: 100%; object-fit: cover;"></li>
+                <li class="slide"><img src="{% static 'images/slider_image_5.jpg' %}" style="height: 100%; width: 100%; object-fit: cover;"></li>
+            </ul>
+            <div class="buttons">
+                <button class="controls" id="pause">Стоп</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/slider.js' %}"></script>
 {% endblock %}
