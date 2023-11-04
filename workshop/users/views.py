@@ -2,13 +2,24 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 
 from .forms import RegisterForm
 
 
-def login(request):
-    context = {}
-    return render(request, "users/login.html", context)
+def login_user(request):
+    print(request.__dict__)
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect(reverse("workshopapp:index"))
+        context = {"error": "Wrong credentials."}
+        return render(request, "users/login.html", context)
+    return render(request, "users/login.html", {})
 
 
 def register(request):

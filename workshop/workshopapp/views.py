@@ -7,12 +7,16 @@ from .forms import FeedbackForm
 
 
 def index(request):
+    return render(request, "workshopapp/index.html")
+
+
+def frames(request):
     frames = Frame.objects.all()[:10]
     context = {
         "frames": frames,
     }
 
-    return render(request, "workshopapp/index.html", context)
+    return render(request, "workshopapp/frames.html", context)
 
 
 def frame(request, frame_id: int):
