@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block includes %}
-    <link rel="stylesheet" href="{% static 'css/slider.css' %}">
+	<link rel="stylesheet" href="{% static 'css/slider.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -13,32 +13,62 @@
  <!-- Slideshow container -->
  <div class="slideshow-container">
 
-    <!-- Full-width images with number and caption text -->
-    <div class="mySlides showing">
-      <div class="numbertext">1 / 3</div>
-      <img src="{% static 'images/slider_image_1.jpg' %}" style="width:100%">
-    </div>
+	<!-- Full-width images with number and caption text -->
+	<div class="mySlides showing">
+	  <div class="numbertext">1 / 3</div>
+	  <img src="{% static 'images/slider_image_1.jpg' %}" style="width:100%">
+	</div>
   
-    <div class="mySlides">
-      <div class="numbertext">2 / 3</div>
-      <img src="{% static 'images/slider_image_2.jpg' %}" style="width:100%">
-    </div>
+	<div class="mySlides">
+	  <div class="numbertext">2 / 3</div>
+	  <img src="{% static 'images/slider_image_2.jpg' %}" style="width:100%">
+	</div>
   
-    <div class="mySlides">
-      <div class="numbertext">3 / 3</div>
-      <img src="{% static 'images/slider_image_4.jpg' %}" style="width:100%">
-    </div>
+	<div class="mySlides">
+	  <div class="numbertext">3 / 3</div>
+	  <img src="{% static 'images/slider_image_4.jpg' %}" style="width:100%">
+	</div>
   
-    <!-- Next and previous buttons -->
-    <a class="prev" onclick="prevSlide()">&#10094;</a>
-    <a class="next" onclick="nextSlide()">&#10095;</a>
+	<!-- Next and previous buttons -->
+	<a class="prev" onclick="prevSlide()">&#10094;</a>
+	<a class="next" onclick="nextSlide()">&#10095;</a>
   </div>
   <br>
   
   <!-- The dots/circles -->
   <div style="text-align:center">
-    <button id="pause">Stop</button>
+	<button id="pause">Stop</button>
   </div> 
 
-    <script src="{% static 'js/slider.js' %}"></script>
+  <h1 style="text-align: center; margin-bottom: auto;">Услуги нашей багетной мастерской</h1>
+
+  <div class="container" style="margin-top: 2%;">
+	<div class="row">
+	  <div class="col">
+		<p>►  Прямые поставки багета от ведущих европейских производителей;</p>
+		<p>►  Разнообразие профилей и декоров от классики до модерна;</p>
+		<p>►  ЧОП-сервис, а также опт от одной рейки;</p>
+		<p>►  Прямые поставки паспарту;</p> 
+	  </div>
+	  <div class="col">
+		<p>►  Любая резка фигурного паспарту любой сложности;</p>
+		<p>►  Нанесение на паспарту орнаментов, тиснение тонких узоров;</p>
+		<p>►  Музейное антибликовое стекло;</p>
+		<p>►  Возможность онлайн заказа; выезд дизайнера, доставка.</p>
+	  </div>
+	</div>
+
+	<h1 style="text-align: center; margin-bottom: 2%;">Видео о нашей багетной мастерской</h1>
+
+	<div class="row">
+		<div class="col">
+			<iframe style="display: block; margin: 0 auto;" width="420" height="315" src="//www.youtube.com/embed/A5AuIk7kUBk?rel=0" allowfullscreen=""></iframe> 
+		</div>
+		<div class="col">
+			<iframe width="420" height="315" src="//www.youtube.com/embed/x_vNrMZPMek?rel=0" allowfullscreen=""></iframe>
+		</div>
+	  </div>
+  </div>
+
+<script src="{% static 'js/slider.js' %}"></script>
 {% endblock %}
