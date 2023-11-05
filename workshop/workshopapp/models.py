@@ -4,9 +4,10 @@ from django.contrib.auth.models import User
 
 class Frame(models.Model):
     name = models.CharField(max_length=200, null=False)
-    description = models.CharField(max_length=1000, default="")
+    description = models.CharField(max_length=1000, default="", null=True)
     cost = models.IntegerField(null=False)
     amount = models.IntegerField(default=0)
+    image_url = models.URLField(max_length=1000, null=True)
 
     def is_sold(self) -> bool:
         return self.amount == 0

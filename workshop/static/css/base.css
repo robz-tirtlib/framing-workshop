@@ -1,3 +1,11 @@
+.frames-card-img {
+    max-width: 100px;
+    max-height: 200px;
+    height: auto;
+    width: auto;
+    object-fit: cover;
+}
+
 .contacts h2, .contacts h1 {
     text-align: center;
 }

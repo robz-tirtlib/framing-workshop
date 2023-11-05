@@ -1,13 +1,30 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
+<div class="container" style="margin-top: 1%;">
     {% if frames %}
-        <ul>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
         {% for frame in frames %}
-            <li><a href="{% url 'workshopapp:frame' frame.id %}">{{ frame.name }}</a></li>
+            <div class="col">
+                <div class="card h-100">
+                {% if frame.image_url %}
+                    <img src="{{ frame.image_url }}" class="card-img-top img-fluid frames-card-img" alt="...">
+                {% else %}
+                    <img src="{% static 'images/no_photo_placeholder.jpg' %}" class="card-img-top img-fluid frames-card-img" alt="...">
+                {% endif %}
+                <div class="d-flex flex-column card-body">
+                    <h5 class="card-title">{{ frame.name }}</h5>
+                    <p class="card-text">{{ frame.description|truncatechars:100 }}</p>
+                    <a href="{% url 'workshopapp:frame' frame.id %}" class="mt-auto btn btn-dark">Подробнее</a>
+                </div>
+                </div>
+            </div>
         {% endfor %}
-        </ul>
+    </div>
     {% else %}
         <p>No frames are available.</p>
     {% endif %}
+</div>
 {% endblock %}
