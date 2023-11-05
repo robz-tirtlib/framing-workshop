@@ -1,10 +1,20 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
 <div class="container">
     <h1>"{{ frame.name }}"</h1>
+    {% if frame.image_url %}
+        <img src="{{ frame.image_url }}" class="card-img-top img-fluid" style="max-height: 300px; width: auto;" alt="...">
+    {% else %}
+        <img src="{% static 'images/no_photo_placeholder.jpg' %}" class="card-img-top img-fluid" style="max-height: 300px; width: auto;" alt="...">
+    {% endif %}
     <h2>Цена: {{ frame.cost }}₽</h2>
-    <p>{{ frame.amount }} items left.</p>
+    <p>Осталось: {{ frame.amount }} шт.</p>
+
+    <h5>Описание:</h5>
+    <p>{{ frame.description }}</p>
 
     <p>Напишите отзыв:</p>
     <form action="{% url 'workshopapp:frame' frame.id %}" method="post">
