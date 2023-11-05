@@ -38,6 +38,8 @@ def frame(request, frame_id: int):
 
         if review_content:
             review_obj = Review(content=review_content, frame=frame)
+            if request.user.is_authenticated:
+                review_obj.author = request.user
             review_obj.save()
 
         kw = {"frame_id": frame_id}

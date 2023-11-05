@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <p>{{ frame.name }} costs {{ frame.cost }}</p>
+<div class="container">
+    <h1>"{{ frame.name }}"</h1>
+    <h2>Цена: {{ frame.cost }}₽</h2>
     <p>{{ frame.amount }} items left.</p>
 
     <p>Напишите отзыв:</p>
@@ -15,9 +17,10 @@
 
     {% for review in reviews %}
         <hr>
-        <p>{{ review.created_at }}</p>
+        <p>{{ review.author|default_if_none:'Аноним' }}, {{ review.created_at|date:'Y-m-d H:i' }}</p>
         <p>{{ review.content }}</p>
     {% empty %}
         <p>Пока отзывов нет.</p>
     {% endfor %}
+</div>
 {% endblock %}

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 from .forms import RegisterForm
 
@@ -23,6 +23,11 @@ def login_user(request):
         context = {"error": "Wrong credentials."}
         return render(request, "users/login.html", context)
     return render(request, "users/login.html", {})
+
+
+def logout_user(request):
+    logout(request)
+    return redirect(reverse("workshopapp:index"))
 
 
 def register(request):
