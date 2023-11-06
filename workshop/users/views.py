@@ -1,13 +1,18 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+
+from .services.auth_service.infrastructure import (
+    get_register_response
+)
 
 from .services.user_profile_service.infrastructure import (
     get_user_from_request, get_response)
 
 from .forms import RegisterForm
+
+from .dao import UserDAO
 
 
 def forgot_password(request):
@@ -34,30 +39,9 @@ def logout_user(request):
 
 
 def register(request):
-    if request.method == "POST":
-        form = RegisterForm(request.POST)
-
-        if form.is_valid():
-            if User.objects.filter(username=form.cleaned_data["username"]):
-                form.add_error("username", "This field should be unique.")
-                return render(request, "users/register.html", {"form": form})
-
-            if User.objects.filter(email=form.cleaned_data["email"]):
-                form.add_error("email", "This field should be unique.")
-                return render(request, "users/register.html", {"form": form})
-
-            user = User.objects.create_user(
-                username=form.cleaned_data["username"],
-                email=form.cleaned_data["email"],
-                password=form.cleaned_data["password"]
-                )
-            user.save()
-            login(request, user)
-            context = {}
-            return redirect(reverse("workshopapp:index", kwargs=context))
-        return render(request, "users/register.html", {"form": form})
-
-    return render(request, "users/register.html", {"form": RegisterForm()})
+    if request.method != "POST":
+        return render(request, "users/register.html", {"form": RegisterForm()})
+    return get_register_response(request, UserDAO())
 
 
 def profile(request, profile_id: int):

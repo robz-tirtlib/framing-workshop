@@ -4,7 +4,7 @@ from django.test.client import RequestFactory
 from users.services.user_profile_service.infrastructure import (
     get_user_from_request, get_response
 )
-from users.tests.materials import (
+from users.test.test_user_profile.materials import (
     user_dto, NotAuthenticatedUserMock, AuthenticatedUserMock)
 
 

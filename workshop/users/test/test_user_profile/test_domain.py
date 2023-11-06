@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from users.services.user_profile_service.domain import is_user_allowed
-from users.tests.materials import user_dto
+from users.test.test_user_profile.materials import user_dto
 
 
 class ProfileDomainTestCase(TestCase):
