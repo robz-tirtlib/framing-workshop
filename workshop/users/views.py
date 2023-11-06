@@ -4,6 +4,9 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
+from .services.user_profile_service.infrastructure import (
+    get_user_from_request, get_response)
+
 from .forms import RegisterForm
 
 
@@ -49,6 +52,7 @@ def register(request):
                 password=form.cleaned_data["password"]
                 )
             user.save()
+            login(request, user)
             context = {}
             return redirect(reverse("workshopapp:index", kwargs=context))
         return render(request, "users/register.html", {"form": form})
@@ -56,6 +60,6 @@ def register(request):
     return render(request, "users/register.html", {"form": RegisterForm()})
 
 
-def profile(request, user_id: int):
-    context = {}
-    return render(request, "users/profile.html", context)
+def profile(request, profile_id: int):
+    user = get_user_from_request(request)
+    return get_response(request, user, profile_id)
