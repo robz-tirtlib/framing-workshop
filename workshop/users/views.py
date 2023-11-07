@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import logout
 
 from .services.auth_service.infrastructure import (
-    get_register_response
+    get_register_response, get_login_response
 )
 
 from .services.user_profile_service.infrastructure import (
@@ -20,17 +20,9 @@ def forgot_password(request):
 
 
 def login_user(request):
-    if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        user = authenticate(username=username, password=password)
-
-        if user is not None:
-            login(request, user)
-            return redirect(reverse("workshopapp:index"))
-        context = {"error": "Wrong credentials."}
-        return render(request, "users/login.html", context)
-    return render(request, "users/login.html", {})
+    if request.method != "POST":
+        return render(request, "users/login.html", {})
+    return get_login_response(request)
 
 
 def logout_user(request):

@@ -1,11 +1,11 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 
 from users.forms import RegisterForm
 
-from .domain import UserRegisterDTO
+from .domain import UserRegisterDTO, UserLoginDTO
 
 from users.dao import UserDAO
 
@@ -16,6 +16,23 @@ def get_user_dto(form: RegisterForm) -> tuple[str]:
         email=form.cleaned_data.get("email"),
         password=form.cleaned_data.get("password"),
     )
+
+
+def get_user_login_dto(request: HttpRequest) -> UserLoginDTO:
+    return UserLoginDTO(
+        username=request.POST.get("username"),
+        password=request.POST.get("password"),
+    )
+
+
+def get_login_response(request: HttpRequest) -> HttpResponse:
+    _user = get_user_login_dto(request)
+    user = authenticate(username=_user.username, password=_user.password)
+
+    if user is not None:
+        login(request, user)
+        return redirect(reverse("workshopapp:index"))
+    return render(request, "users/login.html", {"error": "Wrong credentials."})
 
 
 def get_register_response(
